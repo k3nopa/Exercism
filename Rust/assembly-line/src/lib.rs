@@ -3,12 +3,10 @@
 pub fn production_rate_per_hour(speed: u8) -> f64 {
     let base = speed as f64 * 221.0;
 
-    if speed >= 5 && speed <= 8 {
-        return base * 0.9;
-    } else if speed >= 9 {
-        return base * 0.77;
-    } else {
-        return base;
+    match speed {
+        0..=4 => base,
+        5..=8 => base * 0.9,
+        9..=u8::MAX => base * 0.77,
     }
 }
 
